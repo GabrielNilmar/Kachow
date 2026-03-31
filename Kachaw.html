@@ -466,6 +466,87 @@ moverProjeteisBoss();
 
 // SPAWN DO BOSS
 setTimeout(spawnBoss, 10000);
+
+// =======================
+// ITEM + DERROTAR BOSS (SEM QUEBRAR NADA)
+// =======================
+
+let itemBoss = null;
+let itemColetado = false;
+
+// CRIAR ITEM
+function spawnItemBoss() {
+  if (!jogoAtivo) return;
+
+  itemBoss = document.createElement("img");
+  itemBoss.src = "Images/item.png"; // sua imagem
+  itemBoss.id = "itemBoss";
+
+  document.body.appendChild(itemBoss);
+
+  moverItemBoss();
+}
+
+// ITEM FICA TELEPORTANDO
+function moverItemBoss() {
+  if (!itemBoss || itemColetado || !jogoAtivo) return;
+
+  itemBoss.style.left = Math.random() * (window.innerWidth - 60) + "px";
+  itemBoss.style.top = Math.random() * (window.innerHeight - 60) + "px";
+
+  setTimeout(moverItemBoss, 1000);
+}
+
+// LOOP DO ITEM (coleta + grudar)
+function loopItemBoss() {
+  if (!jogoAtivo) return;
+
+  if (itemBoss && !itemColetado && colidiu(personagem, itemBoss)) {
+    itemColetado = true;
+  }
+
+  if (itemBoss && itemColetado) {
+    itemBoss.style.left = (x + 20) + "px";
+    itemBoss.style.top = (y + 20) + "px";
+  }
+
+  requestAnimationFrame(loopItemBoss);
+}
+loopItemBoss();
+
+// DERROTAR SOMENTE O BOSS PULADOR (não mexe no outro boss)
+function derrotarBossPulo() {
+  if (!jogoAtivo) return;
+
+  if (bossPuloAtivo && itemColetado && bossPulo) {
+    if (colidiu(personagem, bossPulo)) {
+
+      bossPulo.remove();
+      bossPuloAtivo = false;
+
+      if (itemBoss) itemBoss.remove();
+      itemColetado = false;
+
+      mostrarMensagemBoss();
+    }
+  }
+
+  requestAnimationFrame(derrotarBossPulo);
+}
+derrotarBossPulo();
+
+// MENSAGEM
+function mostrarMensagemBoss() {
+  const msg = document.getElementById("mensagemBoss");
+  msg.style.display = "block";
+
+  setTimeout(() => {
+    msg.style.display = "none";
+  }, 3000);
+}
+
+// SPAWN DO ITEM (depois do boss aparecer)
+setTimeout(spawnItemBoss, 7000);
     </script>
 
   </body>

@@ -1,1 +1,81 @@
-apuscatigado
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fundo moderno */
+body {
+  height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #0a0f1c, #121c2b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centralização */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card principal */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 60px 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: 350px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease;
+}
+
+/* Logo */
+.logo {
+  color: #ffffff;
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+/* Texto */
+.descricao {
+  color: #b0b8c5;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+/* Botão moderno */
+.btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ff0000;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover */
+.btn:hover {
+  background: #f70000;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+}
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
